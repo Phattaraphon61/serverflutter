@@ -1,16 +1,16 @@
-import pymongo
-from pymongo import MongoClient
-from typing import Optional ,List
+# import pymongo
+# from pymongo import MongoClient
+# from typing import Optional ,List
 from fastapi import FastAPI,Response,File,UploadFile,Query
-from fastapi.responses import FileResponse
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import StreamingResponse
-from pydantic import BaseModel,Field
-from bson import ObjectId
-import requests
-import jwt
-import os
-import bcrypt
+# from fastapi.responses import FileResponse
+# from starlette.responses import StreamingResponse
+# from pydantic import BaseModel,Field
+# from bson import ObjectId
+# import requests
+# import jwt
+# import os
+# import bcrypt
 app = FastAPI()
 
 # cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mongodb.net/flutter?retryWrites=true&w=majority')

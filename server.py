@@ -21,11 +21,12 @@ collection = db['test']
 dbUser = db['User'] 
 origins = [
     "*",
-    "http://localhost",
-    "http://localhost:80",
-    "http://localhost:8000",
-    "http://localhost:8000/singin",
-    "http://localhost:8000/singup"
+    "https://database-flutter.herokuapp.com",
+    # "http://localhost",
+    # "http://localhost:80",
+    # "http://localhost:8000",
+    # "http://localhost:8000/singin",
+    # "http://localhost:8000/singup"
 
 ]
 app.add_middleware(

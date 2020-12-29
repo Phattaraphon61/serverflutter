@@ -77,7 +77,7 @@ app.add_middleware(
 #     return 
 
 @app.get("/")
-async def read():
+def read():
     return "55555"
 
 # @app.get("/{id}")

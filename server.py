@@ -13,8 +13,8 @@ import os
 import bcrypt
 app = FastAPI()
 
-# cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mongodb.net/flutter?retryWrites=true&w=majority')
-cluster = MongoClient('mongodb://localhost:27017')
+cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mongodb.net/flutter?retryWrites=true&w=majority')
+# cluster = MongoClient('mongodb://localhost:27017')
 
 db = cluster["flutter"]
 collection = db['test']

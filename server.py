@@ -75,6 +75,9 @@ def all():
         tt.append(Users(**i)) 
     return 
 
+@app.get("/")
+async def read():
+    return "55555"
 
 @app.get("/{id}")
 async def read_root(id:str):

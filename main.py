@@ -50,7 +50,7 @@ app.add_middleware(
 )
 @app.get("/")
 def home():
-    return {"111111"}
+    return {"1111112222"}
 @app.get("/b2s/{text}")
 def bit2int(text:str):
     s = int(text[0])

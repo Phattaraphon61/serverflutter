@@ -16,9 +16,3 @@ websockets==8.1
 wrapt==1.11.2
 numpy==1.19.2
 nameko==2.13.0
-pymongo==3.11.2
-# typing==3.7.4.3
-# bson==0.5.10
-# requests==2.25.1
-# jwt==1.1.0
-# bcrypt==3.2.0

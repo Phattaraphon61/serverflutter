@@ -1,7 +1,7 @@
 # import pymongo
 # from pymongo import MongoClient
 # from typing import Optional ,List
-from fastapi import FastAPI,Response,File,UploadFile,Query
+from fastapi import FastAPI,File,UploadFile
 from starlette.middleware.cors import CORSMiddleware
 # from fastapi.responses import FileResponse
 # from starlette.responses import StreamingResponse

@@ -1,5 +1,5 @@
 from fastapi import FastAPI,File,UploadFile
-from pydantic import BaseModel,Field
+from pydantic import BaseModel,Field,BaseConfig
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
 import pymongo
@@ -47,16 +47,38 @@ class PyObjectId(ObjectId):
     @classmethod
     def __modify_schema__(cls, field_schema):
         field_schema.update(type='string')
-class Users(BaseModel):
-    id: Optional[PyObjectId] = Field(alias='_id')
-    tt: Optional[PyObjectId] = Field(alias='id')
-    image: str
-    # email:str
-    class Config:
-        arbitrary_types_allowed = True
+# class Users(BaseModel):
+#     id: Optional[PyObjectId] = Field(alias='_id')
+#     tt: Optional[PyObjectId] = Field(alias='id')
+#     image: str
+#     # email:str
+#     class Config:
+#         arbitrary_types_allowed = True
+#         json_encoders = {
+#             ObjectId: str
+#         }
+
+class MongoBase(BaseModel):
+    id: Optional[PyObjectId]
+    class Config(BaseConfig):
+        orm_mode = True
+        allow_population_by_field_name = True
         json_encoders = {
             ObjectId: str
         }
+
+    def __init__(self, **pydict):
+        super().__init__(**pydict)
+        self.id = pydict.get('_id')
+
+class Users(MongoBase):
+    username: str
+    email: str = None
+    first_name: str = None
+    last_name: str = None
+
+
+
 class Singup(BaseModel):
     name: str
     email:str

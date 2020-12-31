@@ -47,16 +47,16 @@ class PyObjectId(ObjectId):
     @classmethod
     def __modify_schema__(cls, field_schema):
         field_schema.update(type='string')
-class Users(BaseModel):
-    id: Optional[PyObjectId] = Field(alias='_id')
-    tt: Optional[PyObjectId] = Field(alias='id')
-    image: str
-    # email:str
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            ObjectId: str
-        }
+# class Users(BaseModel):
+#     id: Optional[PyObjectId] = Field(alias='_id')
+#     tt: Optional[PyObjectId] = Field(alias='id')
+#     image: str
+#     # email:str
+#     class Config:
+#         arbitrary_types_allowed = True
+#         json_encoders = {
+#             ObjectId: str
+#         }
 class Singup(BaseModel):
     name: str
     email:str
@@ -69,7 +69,7 @@ class CheckEmail(BaseModel):
 
 @app.get("/")
 def home():
-    return {"777"}
+    return {"888"}
 # @app.get("/{id}")
 # async def read_root(id:str):
 #     tt = []

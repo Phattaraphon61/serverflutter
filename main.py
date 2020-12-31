@@ -75,83 +75,83 @@ def all():
 @app.get("/")
 def home():
     return {"666"}
-@app.get("/{id}")
-async def read_root(id:str):
-    tt = []
-    for i in collection.find({'id':id}):
-        print(i)
-        tt.append(Users(**i))
-    if len(tt) == 0:
+# @app.get("/{id}")
+# async def read_root(id:str):
+#     tt = []
+#     for i in collection.find({'id':id}):
+#         print(i)
+#         tt.append(Users(**i))
+#     if len(tt) == 0:
 
-        return [{'_id':"99",'id': "55",'image':'88'}]  
-    return tt
-@app.post("/singin")
-async def singin(tt:Singin):
-    email = tt.email
-    password = tt.password.encode("utf-8")
-    user = dbUser.find({'email':email})
-    try :
-        yy = user[0]['email']
-        try:
-            passdb = user[0]['password'].encode('utf-8')
-            if bcrypt.checkpw(password,passdb):
-                print("match")
-                ids = str(user[0]['_id'])
-                name = str(user[0]['name'])
-                email = str(user[0]['email'])
-                token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
-                return {'status':'singin success','token':token}
-            else:
-                print("does not match")
-                return {'status':'password is incorrect'}
-        except:
-            return {'status':'password is incorrect'}
+#         return [{'_id':"99",'id': "55",'image':'88'}]  
+#     return tt
+# @app.post("/singin")
+# async def singin(tt:Singin):
+#     email = tt.email
+#     password = tt.password.encode("utf-8")
+#     user = dbUser.find({'email':email})
+#     try :
+#         yy = user[0]['email']
+#         try:
+#             passdb = user[0]['password'].encode('utf-8')
+#             if bcrypt.checkpw(password,passdb):
+#                 print("match")
+#                 ids = str(user[0]['_id'])
+#                 name = str(user[0]['name'])
+#                 email = str(user[0]['email'])
+#                 token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
+#                 return {'status':'singin success','token':token}
+#             else:
+#                 print("does not match")
+#                 return {'status':'password is incorrect'}
+#         except:
+#             return {'status':'password is incorrect'}
             
-    except:
-        return {'status':'invalid email'}
+#     except:
+#         return {'status':'invalid email'}
 
-@app.post("/singup")
-async def singup(tt:Singup):
-    name = tt.name
-    email = tt.email
-    password = tt.password.encode('utf-8')
-    checkemail = dbUser.find({'email': email})
+# @app.post("/singup")
+# async def singup(tt:Singup):
+#     name = tt.name
+#     email = tt.email
+#     password = tt.password.encode('utf-8')
+#     checkemail = dbUser.find({'email': email})
 
-    try:
-        yy = checkemail[0]
-        print("มี")
-        return "this email has already been used"
-    except:
-        print("ไม่มี")
-        salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(password, salt)
-        p = hashed.decode()
-        dbUser.insert_one({'name':name,'email':email,'password':p})
-        return "success"
-@app.post("/checkemail")
-async def singup(tt:CheckEmail):
-    email = tt.email
-    print(email)
-    checkemail = dbUser.find({'email': email})
+#     try:
+#         yy = checkemail[0]
+#         print("มี")
+#         return "this email has already been used"
+#     except:
+#         print("ไม่มี")
+#         salt = bcrypt.gensalt()
+#         hashed = bcrypt.hashpw(password, salt)
+#         p = hashed.decode()
+#         dbUser.insert_one({'name':name,'email':email,'password':p})
+#         return "success"
+# @app.post("/checkemail")
+# async def singup(tt:CheckEmail):
+#     email = tt.email
+#     print(email)
+#     checkemail = dbUser.find({'email': email})
 
-    try:
-        yy = checkemail[0]
-        print("มี")
-        return "this email has already been used"
-    except:
-        print("ไม่มี")
-        return "success"
+#     try:
+#         yy = checkemail[0]
+#         print("มี")
+#         return "this email has already been used"
+#     except:
+#         print("ไม่มี")
+#         return "success"
 
-@app.post("/files/{id}/")
-def create_upload_file(id:str,file: UploadFile = File(...)):
-    collection.insert_one({'id':id,'image':file.filename})
-    fn = os.path.basename(file.filename)
-    open("files/"+fn,'wb').write(file.file.read())
-    file_like = open("files/"+fn,"rb")
-    return StreamingResponse(file_like, media_type="image/jpg")
+# @app.post("/files/{id}/")
+# def create_upload_file(id:str,file: UploadFile = File(...)):
+#     collection.insert_one({'id':id,'image':file.filename})
+#     fn = os.path.basename(file.filename)
+#     open("files/"+fn,'wb').write(file.file.read())
+#     file_like = open("files/"+fn,"rb")
+#     return StreamingResponse(file_like, media_type="image/jpg")
 
 
-@app.get("/getimage/{name}")
-def getimages(name:str):
-    file_like = open("files/"+name, mode="rb")
-    return StreamingResponse(file_like, media_type="image/jpg")
+# @app.get("/getimage/{name}")
+# def getimages(name:str):
+#     file_like = open("files/"+name, mode="rb")
+#     return StreamingResponse(file_like, media_type="image/jpg")

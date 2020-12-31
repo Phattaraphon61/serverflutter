@@ -13,8 +13,8 @@ import bcrypt
 app = FastAPI()
 
 
-cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mongodb.net/flutter?retryWrites=true&w=majority')
-# cluster = MongoClient('mongodb://localhost:27017')
+# cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mongodb.net/flutter?retryWrites=true&w=majority')
+cluster = MongoClient('mongodb://localhost:27017')
 
 db = cluster["flutter"]
 collection = db['test']
@@ -58,8 +58,10 @@ class PyObjectId(ObjectId):
 #             ObjectId: str
 #         }
 
+
 class MongoBase(BaseModel):
     id: Optional[PyObjectId]
+    tt:Optional[PyObjectId]
     class Config(BaseConfig):
         orm_mode = True
         allow_population_by_field_name = True
@@ -70,12 +72,10 @@ class MongoBase(BaseModel):
     def __init__(self, **pydict):
         super().__init__(**pydict)
         self.id = pydict.get('_id')
+        self.tt = pydict.get('id')
 
 class Users(MongoBase):
-    username: str
-    email: str = None
-    first_name: str = None
-    last_name: str = None
+    image: str
 
 
 

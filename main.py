@@ -48,8 +48,8 @@ class PyObjectId(ObjectId):
     def __modify_schema__(cls, field_schema):
         field_schema.update(type='string')
 class Users(BaseModel):
-    # id: Optional[PyObjectId] = Field(alias='_id')
-    # tt: Optional[PyObjectId] = Field(alias='id')
+    id: Optional[PyObjectId] = Field(alias='_id')
+    tt: Optional[PyObjectId] = Field(alias='id')
     image: str
     # email:str
     class Config:

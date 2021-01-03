@@ -168,7 +168,7 @@ async def singup(tt:CheckEmail):
 
 @app.post("/files/{id}/")
 def create_upload_file(id:str,file: UploadFile = File(...)):
-    collection.insert_one({'id':id,'image':file.filename})
+    collection.insert_one({'id':id,'image':"google.png"})
     fn = os.path.basename(file.filename)
     open("files/"+fn,'wb').write(file.file.read())
     file_like = open("files/"+fn,"rb")

@@ -19,6 +19,7 @@ cluster = MongoClient('mongodb+srv://phattaraphon:0989153312@cluster0.trckf.mong
 db = cluster["flutter"]
 collection = db['test']
 dbUser = db['User'] 
+
 origins = [
     "*",
 ]
@@ -92,7 +93,7 @@ class CheckEmail(BaseModel):
 @app.get("/")
 def home():
     return {"999"}
-@app.get("/{id}")
+@app.get("/getdata/{id}")
 async def read_root(id:str):
     tt = []
     for i in collection.find({'id':id}):

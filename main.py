@@ -118,7 +118,8 @@ async def singin(tt:Singin):
                 name = str(user[0]['name'])
                 email = str(user[0]['email'])
                 token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
-                return {'status':'singin success'}
+                return "Match"
+                # return {'status':'singin success'}
                 # return {'status':'singin success','token':token}
             else:
                 print("does not match")

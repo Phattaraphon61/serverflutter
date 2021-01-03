@@ -7,7 +7,7 @@ from pymongo import MongoClient
 from typing import Optional
 from bson import ObjectId
 import requests
-import jwt
+import python_jwt as jwt, jwcrypto.jwk as jwk, datetime
 import os
 import bcrypt
 app = FastAPI()
@@ -117,10 +117,14 @@ async def singin(tt:Singin):
                 ids = str(user[0]['_id'])
                 name = str(user[0]['name'])
                 email = str(user[0]['email'])
+                # key = jwk.JWK.generate(kty='RSA', size=2048)
+                key = ''
+                payload = { 'id': ids, 'name': name,"email":email }
+                token = jwt.generate_jwt(payload, key, 'HS256')
                 # token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
                 # return "Match"
-                return {'status':'singin success',"id":ids,"name":name,"email":email}
-                # return {'status':'singin success','token':token}
+                # return {'status':'singin success',"id":ids,"name":name,"email":email}
+                return {'status':'singin success','token':token}
             else:
                 print("does not match")
                 return {'status':'password is incorrectsssss'}

@@ -108,25 +108,27 @@ async def singin(tt:Singin):
     email = tt.email
     password = tt.password.encode("utf-8")
     user = dbUser.find({'email':email})
-    try :
-        yy = user[0]['email']
-        try:
-            passdb = user[0]['password'].encode('utf-8')
-            if bcrypt.checkpw(password,passdb):
-                print("match")
-                ids = str(user[0]['_id'])
-                name = str(user[0]['name'])
-                email = str(user[0]['email'])
-                token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
-                return {'status':'singin success','token':token}
-            else:
-                print("does not match")
-                return {'status':'password is incorrect'}
-        except:
-            return {'status':'password is incorrect'}
+    print(user[0])
+    return user[0]['password'].encode('utf-8')
+    # try :
+    #     yy = user[0]['email']
+    #     try:
+    #         passdb = user[0]['password'].encode('utf-8')
+    #         if bcrypt.checkpw(password,passdb):
+    #             print("match")
+    #             ids = str(user[0]['_id'])
+    #             name = str(user[0]['name'])
+    #             email = str(user[0]['email'])
+    #             token = jwt.encode({'id': ids, 'name': name,'email': email},key="",algorithm="HS256")
+    #             return {'status':'singin success','token':token}
+    #         else:
+    #             print("does not match")
+    #             return {'status':'password is incorrect'}
+    #     except:
+    #         return {'status':'password is incorrect'}
             
-    except:
-        return {'status':'invalid email'}
+    # except:
+    #     return {'status':'invalid email'}
 
 @app.post("/singup")
 async def singup(tt:Singup):
